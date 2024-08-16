@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/16 16:11:30 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/16 16:11:55 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_philo(t_data *data)
 		pthread_mutex_init(&(data->philo[i].r_fork), NULL);
 		pthread_mutex_lock(&(data->philo[i].r_fork));
 		pthread_mutex_unlock(&(data->philo[i].r_fork));
-		if (pthread_cre)
+		if (pthread_create())
 		i++;
 	}
 	i = 0;
