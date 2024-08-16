@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/16 02:29:45 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/16 02:40:37 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@
 // 	printf("Hmmm so good 🌭\n");
 // 	return NULL;
 // }
+
+int	init_data(t_data *data, char *argv[])
+{
+	data->nb = atoi(argv[1]);
+	data->t_die = atoi(argv[2]) * 1e3;
+	data->t_die = atoi(argv[3]) * 1e3;
+	data->t_die = atoi(argv[4]) * 1e3;
+	data->t_die = atoi(argv[5]);
+}
 
 void	check_arg(int ac, char *av[])
 {
@@ -43,8 +52,9 @@ void	check_arg(int ac, char *av[])
 
 int	main(int argc, char *argv[])
 {
-	printf("argc = %d\n", argc);
+	t_data	data;
 	check_arg(argc, argv);
+	init_data(&data, argv);
 	// pthread_t	philosophers[500];
 	// int	i = 0;
 
