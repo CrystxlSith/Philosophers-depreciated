@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 13:02:07 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 13:54:15 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,14 @@
 void	init_philo(t_data *data)
 {
 	int	i;
+	pthread_t	veryfier;
 
 	i = 0;
+	if (pthread_create(&veryfier, NULL, &monitoring, data->philo) != 0)
+	{
+		printf("Error thread monitoring\n", i);
+		ft_error("Exiting...");
+	}
 	while (i < data->nb)
 	{
 		data->philo[i].id = i + 1;
@@ -36,6 +42,8 @@ void	init_philo(t_data *data)
 		}
 		i++;
 	}
+	if (pthread_join(veryfier, NULL) != 0)
+		ft_error("Error joining veryfier");
 	i = -1;
 	while (++i < data->nb)
 		if (pthread_join(data->philo[i].thread, NULL))

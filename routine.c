@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 19:02:24 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 13:32:29 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 14:11:23 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,6 @@ void	eat(t_philo *info)
 	ft_usleep(info->data->t_eat);
 	ft_print("As eaten 🍠\n", info, info->id);
 	info->last_meal = get_current_time();
-	if ((get_current_time() - info->last_meal) > info->data->t_die)
-	{
-		// pthread_mutex_lock(&info->data->dead_lock);
-		info->dead = 1;
-		ft_print("Is died of starvation !! 👻", info, info->id);
-		return ;
-		// pthread_mutex_unlock(&info->data->dead_lock);
-	}
 	info->nb_times_eat += 1;
 	pthread_mutex_unlock(&info->l_fork);
 	pthread_mutex_unlock(info->r_fork);
@@ -72,5 +64,5 @@ void	*routine(void *data)
 		rest(info);
 		i++;	
 	}
-	return (NULL);
+	return (data);
 }

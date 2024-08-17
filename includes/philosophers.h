@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 12:28:21 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 14:07:20 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	ft_print(char *str, t_philo *info, int id);
 void	*routine(void *data);
 size_t	get_current_time(void);
 int	dead_philo(t_philo *info);
+void	*monitoring(void *data);
 void	ft_usleep(size_t ms);
