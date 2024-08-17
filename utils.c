@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:20:39 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/16 20:34:13 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 12:27:35 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	ft_usleep(size_t ms)
 	}
 }
 
-void	ft_print(char *str, t_data *info)
+void	ft_print(char *str, t_philo *info, int id)
 {
-	pthread_mutex_lock(&info->write_lock);
-	if (str)
-		printf("%s\n", str);
-	pthread_mutex_unlock(&info->write_lock);	
+	size_t	a_time;
+	pthread_mutex_lock(&info->data->write_lock);
+	a_time = get_current_time() - info->start_time;
+	if (!dead_philo(info))
+		printf("%zu %d %s\n", a_time, id, str);
+	pthread_mutex_unlock(&info->data->write_lock);	
 }
 
 int	ft_atol(const char *nptr)
