@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 14:07:20 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 14:29:14 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_philo
 	int		dead;
 	struct s_data	*data;
 	pthread_t	thread;
+	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	*r_fork;
 	
@@ -38,7 +39,6 @@ typedef struct s_data
 	long int	t_die;
 	long int	t_sleep;
 	long int	m_eat;
-	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
 	t_philo		*philo;
 }	t_data;

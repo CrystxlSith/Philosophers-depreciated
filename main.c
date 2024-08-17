@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 13:54:15 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 14:30:44 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_philo(t_data *data)
 	i = 0;
 	if (pthread_create(&veryfier, NULL, &monitoring, data->philo) != 0)
 	{
-		printf("Error thread monitoring\n", i);
+		printf("Error thread monitoring\n");
 		ft_error("Exiting...");
 	}
 	while (i < data->nb)
@@ -35,6 +35,7 @@ void	init_philo(t_data *data)
 		else
 			data->philo[i].r_fork = &data->philo[i + 1].l_fork;
 		pthread_mutex_init(&data->philo[i].l_fork, NULL);
+		pthread_mutex_init(&data->philo->dead_lock, NULL);
 		if (pthread_create(&(data->philo[i].thread), NULL, &routine, &(data->philo[i])))
 		{
 			printf("Error thread creat num %d\n", i);
@@ -52,7 +53,6 @@ void	init_philo(t_data *data)
 
 int	init_data(t_data *data, char *argv[])
 {
-	pthread_mutex_init(&data->dead_lock, NULL);
 	pthread_mutex_init(&data->write_lock, NULL);
 	data->nb = ft_atol(argv[1]);
 	data->philo = malloc(sizeof(t_philo) * data->nb);

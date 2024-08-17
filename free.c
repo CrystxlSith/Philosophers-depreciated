@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:27:09 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 11:42:57 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 14:30:24 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_destroy(t_data *data)
 		pthread_mutex_destroy(data->philo[i].r_fork);
 		i++;
 	}
-	pthread_mutex_destroy(&data->dead_lock);
+	// pthread_mutex_destroy(&data->dead_lock);
 	pthread_mutex_destroy(&data->write_lock);
 	free(data->philo);
 }

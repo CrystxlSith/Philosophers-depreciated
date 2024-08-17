@@ -6,7 +6,7 @@
 /*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 19:02:24 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 14:11:23 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/17 14:32:15 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	rest(t_philo *data)
 
 int	dead_philo(t_philo *info)
 {
-	pthread_mutex_lock(&info->data->dead_lock);
+	pthread_mutex_lock(&info->dead_lock);
 	if (info->dead == 1)
 	{
-		pthread_mutex_unlock(&info->data->dead_lock);
+		pthread_mutex_unlock(&info->dead_lock);
 		return (1);
 	}
-	pthread_mutex_unlock(&info->data->dead_lock);
+	pthread_mutex_unlock(&info->dead_lock);
 	return (0);
 }
 
