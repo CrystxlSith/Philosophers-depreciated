@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/17 14:30:44 by crystal          ###   ########.fr       */
+/*   Updated: 2024/08/19 14:06:34 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ void	init_philo(t_data *data)
 		data->philo[i].id = i + 1;
 		data->philo[i].nb_times_eat = 0;
 		data->philo[i].data = data;
-		data->philo[i].dead = 0;
+		data->dead = 0;
+		data->philo[i].eat = 1;
 		data->philo[i].start_time = get_current_time();
 		if (i == data->nb - 1)
 			data->philo[i].r_fork = &data->philo[0].l_fork;
 		else
 			data->philo[i].r_fork = &data->philo[i + 1].l_fork;
 		pthread_mutex_init(&data->philo[i].l_fork, NULL);
-		pthread_mutex_init(&data->philo->dead_lock, NULL);
+		pthread_mutex_init(&data->dead_lock, NULL);
 		if (pthread_create(&(data->philo[i].thread), NULL, &routine, &(data->philo[i])))
 		{
 			printf("Error thread creat num %d\n", i);
@@ -51,7 +52,7 @@ void	init_philo(t_data *data)
 			ft_error("Errror joining threads");	
 }
 
-int	init_data(t_data *data, char *argv[])
+void	init_data(t_data *data, char *argv[])
 {
 	pthread_mutex_init(&data->write_lock, NULL);
 	data->nb = ft_atol(argv[1]);
@@ -90,14 +91,6 @@ int	main(int argc, char *argv[])
 	check_arg(argc, argv);
 	init_data(&data, argv);
 	init_philo(&data);
-	// pthread_t	philosophers[500];
-	// int	i = 0;
-
-	// while (i++ < 500)
-	// 	pthread_create(philosophers + i, NULL, routine, NULL);
-	// i = 0;
-	// while (i++ < 500)
-	// 	pthread_join(philosophers[i], NULL);
 	printf("End of the simulation 🎮\n");
 	free_destroy(&data);
 	return 0;
