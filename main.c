@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/19 14:06:34 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:02:41 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	init_philo(t_data *data)
 		data->philo[i].id = i + 1;
 		data->philo[i].nb_times_eat = 0;
 		data->philo[i].data = data;
-		data->dead = 0;
 		data->philo[i].eat = 1;
 		data->philo[i].start_time = get_current_time();
 		if (i == data->nb - 1)
@@ -60,6 +59,7 @@ void	init_data(t_data *data, char *argv[])
 	data->t_die = ft_atol(argv[2]);
 	data->t_eat = ft_atol(argv[3]);
 	data->t_sleep = ft_atol(argv[4]);
+	data->dead = 0;
 	if (argv[5])
 		data->m_eat = ft_atol(argv[5]);
 }
