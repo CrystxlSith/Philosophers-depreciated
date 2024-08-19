@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:54:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/19 15:01:33 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:19:05 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int	dead_one(t_philo *philo)
 		if (dead_philo_monitoring(&philo[i]))
 		{
 			ft_print("is dead !! 👻\n", philo, philo->id);
+			 pthread_mutex_lock(&philo[0].data->dead_lock);
 			philo[i].data->dead = 1;
+			pthread_mutex_unlock(&philo[0].data->dead_lock);
 				return (1);
 			
 		}
