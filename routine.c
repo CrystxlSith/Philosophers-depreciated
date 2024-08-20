@@ -3,26 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 19:02:24 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/19 15:15:46 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:20:37 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
-void	think(t_philo *data)
+void	think_rest(t_philo *data)
 {
-	if (dead_philo(data))
-		return ;
+	// if (dead_philo(data))
+	// 	return ;
 	ft_print("Is Thinking 🤔\n", data, data->id);
-}
-
-void	rest(t_philo *data)
-{
-	if (dead_philo(data))
-		return ;
+	// if (dead_philo(data))
+	// 	return ;
 	ft_print("Is sleeping 😴🛌\n", data, data->id);
 	ft_usleep(data->data->t_sleep);
 }
@@ -47,12 +43,16 @@ void	eat(t_philo *info)
 	ft_print("Take a fork 🍴\n", info, info->id);
 	pthread_mutex_lock(&info->l_fork);
 	ft_print("Take a fork 🍴\n", info, info->id);
-	pthread_mutex_lock(&info->data->dead_lock);
-	info->last_meal = get_current_time();
-	pthread_mutex_unlock(&info->data->dead_lock);
+	info->eat = 1;
 	ft_print("As eaten 🍠\n", info, info->id);
-	ft_usleep(info->data->t_eat);
+	// pthread_mutex_lock(&info->data->dead_lock);
+	pthread_mutex_lock(&info->data->eat_lock);
+	info->last_meal = get_current_time();
 	info->nb_times_eat += 1;
+	pthread_mutex_unlock(&info->data->eat_lock);
+	// pthread_mutex_unlock(&info->data->dead_lock);
+	ft_usleep(info->data->t_eat);
+	info->eat = 0;
 	pthread_mutex_unlock(&info->l_fork);
 	pthread_mutex_unlock(info->r_fork);
 }
@@ -69,8 +69,7 @@ void	*routine(void *data)
 	while (!dead_philo(info))
 	{
 		eat(info);
-		think(info);
-		rest(info);
+		think_rest(info);
 		// i++;	
 	}
 	// while (1)

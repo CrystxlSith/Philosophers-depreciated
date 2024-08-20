@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/19 13:53:35 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/08/20 19:41:00 by crystal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 typedef struct s_philo
 {
 	long int	nb_times_eat;
-	int		last_meal;
+	size_t		last_meal;
 	size_t		start_time;
 	int		id;
+	int		*dead;
 	int		eat;
 	struct s_data	*data;
 	pthread_t	thread;
+	// pthread_mutex_t	*eat_lock;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	*r_fork;
 	
