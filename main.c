@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/20 20:09:41 by crystal          ###   ########.fr       */
+/*   Updated: 2024/10/01 14:48:38 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	init_philo(t_data *data)
 		data->philo[i].start_time = get_current_time();
 		data->philo[i].last_meal = get_current_time();
 		if (i == data->nb - 1)
-			data->philo[i].r_fork = &data->philo[0].l_fork;
+			data->philo[i].r_fork = data->philo[0].l_fork;
 		else
-			data->philo[i].r_fork = &data->philo[i + 1].l_fork;
-		pthread_mutex_init(&data->philo[i].l_fork, NULL);
+			data->philo[i].r_fork = data->philo[i + 1].l_fork;
+		pthread_mutex_init(data->philo[i].l_fork, NULL);
 		if (pthread_create(&(data->philo[i].thread), NULL, &routine, &(data->philo[i])))
 		{
-			printf("Error thread creat num %d\n", i);
+			printf("Error thread create num %d\n", i);
 			ft_error("Exiting...");
 		}
 		i++;
@@ -45,11 +45,11 @@ void	init_philo(t_data *data)
 		ft_error("Exiting...");
 	}
 	if (pthread_join(veryfier, NULL) != 0)
-		ft_error("Error joining veryfier");
+		ft_error("Error joining verifier");
 	i = -1;
 	while (++i < data->nb)
 		if (pthread_join(data->philo[i].thread, NULL))
-			ft_error("Errror joining threads");	
+			ft_error("Error joining threads");	
 }
 
 void	init_data(t_data *data, char *argv[])
@@ -65,6 +65,10 @@ void	init_data(t_data *data, char *argv[])
 	data->dead = 0;
 	if (argv[5])
 		data->m_eat = ft_atol(argv[5]);
+	else
+		data->m_eat = -1;
+	if (data->nb == 1)
+		data->m_eat = 1;
 }
 
 void	check_arg(int ac, char *av[])
@@ -94,7 +98,7 @@ int	main(int argc, char *argv[])
 	check_arg(argc, argv);
 	init_data(&data, argv);
 	init_philo(&data);
-	printf("End of the simulation 🎮\n");
+	// printf("End of the simulation 🎮\n");
 	free_destroy(&data);
 	return 0;
 }

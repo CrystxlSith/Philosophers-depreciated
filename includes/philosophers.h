@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/20 19:41:00 by crystal          ###   ########.fr       */
+/*   Updated: 2024/10/01 14:48:04 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_philo
 	struct s_data	*data;
 	pthread_t	thread;
 	// pthread_mutex_t	*eat_lock;
-	pthread_mutex_t	l_fork;
+	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	
 }	t_philo;
@@ -37,10 +37,10 @@ typedef struct s_data
 {
 	long int	nb;
 	int		dead;
-	long int	t_eat;
-	long int	t_die;
-	long int	t_sleep;
-	long int	m_eat;
+	unsigned int	t_eat;
+	unsigned int	t_die;
+	unsigned int	t_sleep;
+	unsigned int	m_eat;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	eat_lock;
