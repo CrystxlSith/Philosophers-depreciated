@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 11:55:47 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:59:39 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ typedef struct s_data
 {
 	long int	nb;
 	int		dead;
-	long int	t_eat;
-	long int	t_die;
-	long int	t_sleep;
-	long int	m_eat;
+
+	unsigned int	t_eat;
+	unsigned int	t_die;
+	unsigned int	t_sleep;
+	unsigned int	m_eat;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	eat_lock;
-	
 	t_philo		*philo;
 }	t_data;
 

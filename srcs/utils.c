@@ -6,11 +6,11 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:20:39 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 11:46:48 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:57:22 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/philosophers.h"
+#include "../includes/philosophers.h"
 
 size_t	get_current_time(void)
 {
