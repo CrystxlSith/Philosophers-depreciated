@@ -6,16 +6,15 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/01 14:48:38 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:22:23 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
-void	init_philo(t_data *data)
+void	init_philo(t_data *data, pthread_mutex_t *forks)
 {
 	int	i;
-	pthread_t	veryfier;
 
 	i = 0;
 	while (i < data->nb)
@@ -27,29 +26,12 @@ void	init_philo(t_data *data)
 		data->philo[i].dead = &data->dead;
 		data->philo[i].start_time = get_current_time();
 		data->philo[i].last_meal = get_current_time();
-		if (i == data->nb - 1)
-			data->philo[i].r_fork = data->philo[0].l_fork;
+		if (i == 0)
+			data->philo[i].r_fork = &forks[data->nb - 1];
 		else
-			data->philo[i].r_fork = data->philo[i + 1].l_fork;
-		pthread_mutex_init(data->philo[i].l_fork, NULL);
-		if (pthread_create(&(data->philo[i].thread), NULL, &routine, &(data->philo[i])))
-		{
-			printf("Error thread create num %d\n", i);
-			ft_error("Exiting...");
-		}
+			data->philo[i].r_fork = &forks[i - 1];
 		i++;
 	}
-	if (pthread_create(&veryfier, NULL, &monitoring, data->philo) != 0)
-	{
-		printf("Error thread monitoring\n");
-		ft_error("Exiting...");
-	}
-	if (pthread_join(veryfier, NULL) != 0)
-		ft_error("Error joining verifier");
-	i = -1;
-	while (++i < data->nb)
-		if (pthread_join(data->philo[i].thread, NULL))
-			ft_error("Error joining threads");	
 }
 
 void	init_data(t_data *data, char *argv[])
@@ -92,12 +74,56 @@ void	check_arg(int ac, char *av[])
 	}
 }
 
+void	init_forks(pthread_mutex_t *forks, long int nb)
+{
+	long int	i;
+
+	i = 0;
+	while (i < nb)
+	{
+		pthread_mutex_init(&forks[i], NULL);
+		i++;
+	}
+}
+
+void	create_threads(t_data *data/*, pthread_mutex_t *forks*/)
+{
+	int	i;
+	pthread_t	veryfier;
+
+	i = 0;
+	if (pthread_create(&veryfier, NULL, &monitoring, data->philo) != 0)
+	{
+		printf("Error thread monitoring\n");
+		ft_error("Exiting...");
+	}
+	while (i < data->nb)
+	{
+		if (pthread_create(&(data->philo[i].thread), NULL, &routine, &(data->philo[i])))
+		{
+			printf("Error thread create num %d\n", i);
+			ft_error("Exiting...");
+		}
+		i++;
+	}
+	if (pthread_join(veryfier, NULL) != 0)
+		ft_error("Error joining verifier");
+	i = -1;
+	while (++i < data->nb)
+		if (pthread_join(data->philo[i].thread, NULL))
+			ft_error("Error joining threads");
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
+	pthread_mutex_t	forks[200];
+
 	check_arg(argc, argv);
+	init_forks(forks, ft_atol(argv[1]));
 	init_data(&data, argv);
-	init_philo(&data);
+	init_philo(&data, forks);
+	create_threads(&data/*, forks*/);
 	// printf("End of the simulation 🎮\n");
 	free_destroy(&data);
 	return 0;

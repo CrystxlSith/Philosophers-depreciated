@@ -6,16 +6,18 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:54:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/01 14:18:26 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 10:17:01 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
+
+
 int dead_philo_monitoring(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->eat_lock);
-	if (get_current_time() - philo->last_meal > philo->data->t_die && philo->eat == 0)
+	if (get_current_time() - philo->last_meal >= philo->data->t_die && philo->eat == 0)
 	{
 		pthread_mutex_unlock(&philo->data->eat_lock);	
 		return (1);
@@ -68,6 +70,8 @@ int		eat_reached(t_philo *philo)
 
 	i = 0;
 	complete_meals = 0;
+	if (philo->data->m_eat == -1)
+		return (0);
 	while (i < philo->data->nb)
 	{
 		pthread_mutex_lock(&philo[i].data->eat_lock);

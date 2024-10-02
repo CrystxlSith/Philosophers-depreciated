@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/01 14:48:04 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 08:23:21 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_data
 	unsigned int	t_eat;
 	unsigned int	t_die;
 	unsigned int	t_sleep;
-	unsigned int	m_eat;
+	int	m_eat;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	eat_lock;

@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 19:02:24 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/01 14:49:00 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 08:15:23 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	dead_philo(t_philo *info)
 	pthread_mutex_unlock(&info->data->dead_lock);
 	return (0);
 }
-int	eat(t_philo *info)
+void	eat(t_philo *info)
 {
 	pthread_mutex_lock(info->r_fork);
 	ft_print("has taken a fork", info, info->id);
@@ -43,7 +43,8 @@ int	eat(t_philo *info)
 		ft_usleep(info->data->t_die);
 		info->nb_times_eat += 1;
 		info->eat = 0;
-		return (pthread_mutex_unlock(info->r_fork), 1);
+		pthread_mutex_unlock(info->r_fork);
+		return ;
 	}
 	pthread_mutex_lock(info->l_fork);
 	ft_print("has taken a fork", info, info->id);
@@ -57,7 +58,6 @@ int	eat(t_philo *info)
 	info->eat = 0;
 	pthread_mutex_unlock(info->l_fork);
 	pthread_mutex_unlock(info->r_fork);
-	return (0);
 }
 
 void	*routine(void *data)
@@ -71,8 +71,7 @@ void	*routine(void *data)
 		ft_usleep(1);
 	while (!dead_philo(info))
 	{
-		if (eat(info) == 1)
-			break ;
+		eat(info);
 		think_rest(info);
 		// i++;	
 	}
