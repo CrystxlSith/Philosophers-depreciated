@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 14:18:06 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:32:16 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	init_data(t_data *data, char *argv[])
 		data->m_eat = -1;
 	if (data->nb == 1)
 		data->m_eat = 1;
-	printf("must eat %d\n", data->m_eat);
+	// printf("%ld philos must eat %d times\n", data->nb, data->m_eat);
 }
 
 void	check_arg(int ac, char *av[])

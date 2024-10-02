@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 19:02:24 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 14:12:34 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:12:50 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	think_rest(t_philo *data)
 
 int	dead_philo(t_philo *info)
 {
+	if (info == NULL)
+		return (1);
 	pthread_mutex_lock(&info->data->dead_lock);
 	if (info->data->dead == 1)
 	{

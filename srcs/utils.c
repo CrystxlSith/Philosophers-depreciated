@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:20:39 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 13:57:22 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:28:23 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	ft_usleep(size_t ms)
 		// else
 			usleep(500);
 	}
+}
+
+void ft_print_eat(char *str, t_philo *info)
+{
+	size_t	a_time;
+	pthread_mutex_lock(&info->data->write_lock);
+	a_time = get_current_time() - info->start_time;
+	if (!dead_philo(info))
+		printf("%zu %s %d times\n", a_time, str, info->data->m_eat);
+	pthread_mutex_unlock(&info->data->write_lock);	
 }
 
 void	ft_print(char *str, t_philo *info, int id)

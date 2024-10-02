@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 13:59:39 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:15:27 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_data
 	unsigned int	t_eat;
 	unsigned int	t_die;
 	unsigned int	t_sleep;
-	unsigned int	m_eat;
+	int	m_eat;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	eat_lock;
@@ -52,6 +52,7 @@ typedef struct s_data
 int	ft_isdigit(int c);
 void	ft_error(char *str);
 size_t	ft_strlen(const char *s);
+void ft_print_eat(char *str, t_philo *info);
 int	ft_atol(const char *nptr);
 void	free_destroy(t_data *data);
 void	ft_print(char *str, t_philo *info, int id);
