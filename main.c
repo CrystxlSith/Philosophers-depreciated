@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/20 20:09:41 by crystal          ###   ########.fr       */
+/*   Updated: 2024/10/02 11:48:35 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ int	main(int argc, char *argv[])
 	init_data(&data, argv);
 	init_philo(&data);
 	printf("End of the simulation 🎮\n");
-	free_destroy(&data);
+	// free_destroy(&data);
 	return 0;
 }

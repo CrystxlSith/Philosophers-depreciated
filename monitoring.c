@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crystal <crystal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:54:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/08/20 20:12:58 by crystal          ###   ########.fr       */
+/*   Updated: 2024/10/02 10:38:30 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	dead_one(t_philo *philo)
 	{
 		if (dead_philo_monitoring(&philo[i]))
 		{
-			ft_print("is died of starvation !! 👻\n", &philo[i], philo[i].id);
-			 pthread_mutex_lock(&philo[0].data->dead_lock);
+			ft_print("is died", &philo[i], philo[i].id);
+			pthread_mutex_lock(&philo[0].data->dead_lock);
 			philo[0].data->dead = 1;
 			pthread_mutex_unlock(&philo[0].data->dead_lock);
 				return (1);
