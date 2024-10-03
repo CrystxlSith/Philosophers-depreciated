@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crycry <crycry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:20:39 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 15:28:23 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/03 19:26:25 by crycry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_usleep(size_t ms)
 		// if (time_left < 1)
 		// 	usleep(time_left * 1000);
 		// else
-			usleep(500);
+			usleep(100);
 	}
 }
 

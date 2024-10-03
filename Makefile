@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+         #
+#    By: crycry <crycry@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 09:56:33 by jopfeiff          #+#    #+#              #
-#    Updated: 2024/10/02 13:55:24 by jopfeiff         ###   ########.fr        #
+#    Updated: 2024/10/03 19:15:32 by crycry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.c srcs/monitoring.c srcs/routine.c srcs/utils.c srcs/free.c srcs/error_handler.c
 CC = cc
-CFLAGS = -g3 -Wall -Wextra -Werror -I./includes/
+CFLAGS = -g3 -Wall -Wextra -Werror -pthread -I ./includes/
 RM = rm -rf
 EXEC = philo
 NAME = philo.a

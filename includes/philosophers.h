@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crycry <crycry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 15:15:27 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:47:24 by crycry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_philo
 	int		eat;
 	struct s_data	*data;
 	pthread_t	thread;
-	// pthread_mutex_t	*eat_lock;
+	pthread_mutex_t	eat_lock;
 	pthread_mutex_t	l_fork;
 	pthread_mutex_t	*r_fork;
 	
@@ -45,7 +45,7 @@ typedef struct s_data
 	int	m_eat;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
-	pthread_mutex_t	eat_lock;
+	// pthread_mutex_t	eat_lock;
 	t_philo		*philo;
 }	t_data;
 

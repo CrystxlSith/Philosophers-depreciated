@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: crycry <crycry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/02 15:32:16 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:53:36 by crycry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 void init_philo(t_data *data) {
     int i;
     pthread_t veryfier;
-    for (i = 0; i < data->nb; i++) {
+    for (i = 0; i < data->nb; i++)
+	{
         if (i == data->nb - 1)
             data->philo[i].r_fork = &data->philo[0].l_fork;
         else
             data->philo[i].r_fork = &data->philo[i + 1].l_fork;
         pthread_mutex_init(&data->philo[i].l_fork, NULL);
+		pthread_mutex_init(&data->philo[i].eat_lock, NULL);
     }
     for (i = 0; i < data->nb; i++) {
         data->philo[i].id = i + 1;
@@ -91,7 +93,6 @@ void init_philo(t_data *data) {
 void	init_data(t_data *data, char *argv[])
 {
 	pthread_mutex_init(&data->dead_lock, NULL);
-	pthread_mutex_init(&data->eat_lock, NULL);
 	pthread_mutex_init(&data->write_lock, NULL);
 	data->nb = ft_atol(argv[1]);
 	data->philo = malloc(sizeof(t_philo) * data->nb);
