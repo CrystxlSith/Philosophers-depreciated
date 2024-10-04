@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crycry <crycry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/03 18:47:24 by crycry           ###   ########.fr       */
+/*   Updated: 2024/10/04 07:50:17 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,6 @@ size_t	get_current_time(void);
 int	dead_philo(t_philo *info);
 void	*monitoring(void *data);
 void	ft_usleep(size_t ms);
+void	pair(t_philo *info);
+void	impair(t_philo *info);
+void	solo_philo(t_philo *info);

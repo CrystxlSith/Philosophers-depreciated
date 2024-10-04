@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crycry <crycry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 13:54:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/03 18:52:10 by crycry           ###   ########.fr       */
+/*   Updated: 2024/10/04 07:24:46 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int eat_reached(t_philo *philo)
     while (i < philo->data->nb)
 	{
         pthread_mutex_lock(&philo[i].eat_lock);
-        if (philo[i].nb_times_eat == philo->data->m_eat)
+        if (philo[i].nb_times_eat >= philo->data->m_eat)
             complete_meals++;
         pthread_mutex_unlock(&philo[i].eat_lock);
         i++;
     }
-    if (complete_meals == philo->data->nb)
+    if (complete_meals >= philo->data->nb)
 	{
         pthread_mutex_lock(&philo[0].data->dead_lock);
         philo[0].data->dead = 1;

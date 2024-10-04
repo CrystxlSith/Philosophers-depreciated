@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: crycry <crycry@student.42.fr>              +#+  +:+       +#+         #
+#    By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 09:56:33 by jopfeiff          #+#    #+#              #
-#    Updated: 2024/10/03 19:15:32 by crycry           ###   ########.fr        #
+#    Updated: 2024/10/04 07:50:38 by jopfeiff         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c srcs/monitoring.c srcs/routine.c srcs/utils.c srcs/free.c srcs/error_handler.c
+SRCS = main.c srcs/monitoring.c srcs/routine.c srcs/utils.c srcs/free.c srcs/error_handler.c srcs/utils2.c
 CC = cc
 CFLAGS = -g3 -Wall -Wextra -Werror -pthread -I ./includes/
 RM = rm -rf
