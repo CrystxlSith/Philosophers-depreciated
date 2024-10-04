@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 00:34:28 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/04 07:50:17 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/04 08:03:03 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,4 @@ void	*monitoring(void *data);
 void	ft_usleep(size_t ms);
 void	pair(t_philo *info);
 void	impair(t_philo *info);
-void	solo_philo(t_philo *info);
+int	solo_philo(t_philo *info);

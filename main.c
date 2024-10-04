@@ -3,92 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crycry <crycry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 23:24:29 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/03 18:53:36 by crycry           ###   ########.fr       */
+/*   Updated: 2024/10/04 08:38:41 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
-#include <pthread.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-
-void init_philo(t_data *data) {
-    int i;
-    pthread_t veryfier;
-    for (i = 0; i < data->nb; i++)
-	{
-        if (i == data->nb - 1)
-            data->philo[i].r_fork = &data->philo[0].l_fork;
-        else
-            data->philo[i].r_fork = &data->philo[i + 1].l_fork;
-        pthread_mutex_init(&data->philo[i].l_fork, NULL);
-		pthread_mutex_init(&data->philo[i].eat_lock, NULL);
-    }
-    for (i = 0; i < data->nb; i++) {
-        data->philo[i].id = i + 1;
-        data->philo[i].nb_times_eat = 0;
-        data->philo[i].data = data;
-        data->philo[i].eat = 1;
-        data->philo[i].dead = &data->dead;
-        data->philo[i].start_time = get_current_time();
-        data->philo[i].last_meal = get_current_time();
-        if (pthread_create(&(data->philo[i].thread), NULL, &routine, &(data->philo[i]))) {
-            printf("Error thread creat num %d\n", i);
-            ft_error("Exiting...");
-        }
-    }
-    if (pthread_create(&veryfier, NULL, &monitoring, data->philo) != 0) {
-        printf("Error thread monitoring\n");
-        ft_error("Exiting...");
-    }
-    if (pthread_join(veryfier, NULL) != 0)
-        ft_error("Error joining veryfier");
-    for (i = 0; i < data->nb; i++) {
-        if (pthread_join(data->philo[i].thread, NULL))
-            ft_error("Errror joining threads");
-    }
+void	init_philo_data(t_data *data, int i)
+{
+	data->philo[i].id = i + 1;
+	data->philo[i].nb_times_eat = 0;
+	data->philo[i].data = data;
+	data->philo[i].eat = 1;
+	data->philo[i].dead = &data->dead;
+	data->philo[i].start_time = get_current_time();
+	data->philo[i].last_meal = get_current_time();
 }
 
-// void init_philo(t_data *data) {
-//     int i;
-//     pthread_t veryfier;
+void	init_philo(t_data *data)
+{
+	int			i;
+	pthread_t	veryfier;
 
-//     i = 0;
-//     while (i < data->nb) {
-//         data->philo[i].id = i + 1;
-//         data->philo[i].nb_times_eat = 0;
-//         data->philo[i].data = data;
-//         data->philo[i].eat = 1;
-//         data->philo[i].dead = &data->dead;
-//         data->philo[i].start_time = get_current_time();
-//         data->philo[i].last_meal = get_current_time();
-//         if (i == data->nb - 1)
-//             data->philo[i].r_fork = &data->philo[0].l_fork;
-//         else
-//             data->philo[i].r_fork = &data->philo[i + 1].l_fork;
-//         pthread_mutex_init(&data->philo[i].l_fork, NULL);
-//         if (pthread_create(&(data->philo[i].thread), NULL, &routine, &(data->philo[i]))) {
-//             printf("Error thread creat num %d\n", i);
-//             ft_error("Exiting...");
-//         }
-//         i++;
-//     }
-//     if (pthread_create(&veryfier, NULL, &monitoring, data->philo) != 0) {
-//         printf("Error thread monitoring\n");
-//         ft_error("Exiting...");
-//     }
-//     if (pthread_join(veryfier, NULL) != 0)
-//         ft_error("Error joining veryfier");
-//     i = -1;
-//     while (++i < data->nb)
-//         if (pthread_join(data->philo[i].thread, NULL))
-//             ft_error("Errror joining threads");
-// }
+	i = 0;
+	while (i < data->nb)
+	{
+		init_philo_data(data, i);
+		pthread_create(&(data->philo[i].thread), \
+		NULL, &routine, &(data->philo[i]));
+		i++;
+	}
+	pthread_create(&veryfier, NULL, &monitoring, data->philo);
+	if (pthread_join(veryfier, NULL) != 0)
+		ft_error("Error joining veryfier");
+	i = 0;
+	while (i < data->nb)
+	{
+		if (pthread_join(data->philo[i].thread, NULL))
+			ft_error("Errror joining threads");
+		i++;
+	}
+}
 
 void	init_data(t_data *data, char *argv[])
 {
@@ -104,9 +62,8 @@ void	init_data(t_data *data, char *argv[])
 		data->m_eat = ft_atol(argv[5]);
 	else
 		data->m_eat = -1;
-	if (data->nb == 1)
-		data->m_eat = 1;
-	// printf("%ld philos must eat %d times\n", data->nb, data->m_eat);
+	// if (data->nb == 1)
+		// data->m_eat = 1;
 }
 
 void	check_arg(int ac, char *av[])
@@ -123,9 +80,26 @@ void	check_arg(int ac, char *av[])
 		while (av[i][j])
 		{
 			if (!ft_isdigit(av[i][j]))
-				ft_error("Invalid argument\n");	
+				ft_error("Invalid argument\n");
 			j++;
 		}
+		i++;
+	}
+}
+
+void	fork_init(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb)
+	{
+		if (i == data->nb - 1)
+			data->philo[i].r_fork = &data->philo[0].l_fork;
+		else
+			data->philo[i].r_fork = &data->philo[i + 1].l_fork;
+		pthread_mutex_init(&data->philo[i].l_fork, NULL);
+		pthread_mutex_init(&data->philo[i].eat_lock, NULL);
 		i++;
 	}
 }
@@ -133,10 +107,11 @@ void	check_arg(int ac, char *av[])
 int	main(int argc, char *argv[])
 {
 	t_data	data;
+
 	check_arg(argc, argv);
 	init_data(&data, argv);
+	fork_init(&data);
 	init_philo(&data);
-	// printf("End of the simulation 🎮\n");
 	free_destroy(&data);
-	return 0;
+	return (0);
 }

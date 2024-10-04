@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crycry <crycry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 15:27:09 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/03 18:53:12 by crycry           ###   ########.fr       */
+/*   Updated: 2024/10/04 07:54:51 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_destroy(t_data *data)
 	long int	i;
 
 	i = 0;
-	while(i < data->nb)
+	while (i < data->nb)
 	{
 		pthread_mutex_destroy(data->philo[i].r_fork);
 		pthread_mutex_destroy(&data->philo[i].eat_lock);

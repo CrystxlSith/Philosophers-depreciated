@@ -6,7 +6,7 @@
 /*   By: jopfeiff <jopfeiff@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 01:20:39 by crystal           #+#    #+#             */
-/*   Updated: 2024/10/04 07:48:49 by jopfeiff         ###   ########.fr       */
+/*   Updated: 2024/10/04 08:01:04 by jopfeiff         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	get_current_time(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec) / 1000);
@@ -26,14 +26,14 @@ void	ft_usleep(size_t ms)
 
 	starting = get_current_time();
 	while ((get_current_time() - starting) < ms)
-			usleep(100);
+		usleep(100);
 }
 
 int	ft_atol(const char *nptr)
 {
 	long	result;
-	int	sign;
-	int	i;
+	int		sign;
+	int		i;
 
 	i = 0;
 	result = 0;
@@ -41,7 +41,7 @@ int	ft_atol(const char *nptr)
 	while (nptr[i] == ' ' || nptr[i] == '\n' || nptr[i] == '\t'
 		|| nptr[i] == '\v'
 		|| nptr[i] == '\f' || nptr[i] == '\r')
-			i++;
+		i++;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
 		if (nptr[i] == '-')
